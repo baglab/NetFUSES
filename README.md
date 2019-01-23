@@ -37,13 +37,13 @@ between vector.
 For the sake of the example, let's assume there's an embedding file called `external_embedding_file`
 that stores sentence vectors.
 
-<pre>
+```python
 from external_embedding_file import sentence_vectors  # maps causal entities to sentence embeddings
 import scipy.spatial
 
 def cosine_similarity(u, v):
     return 1 - scipy.spatial.distance.cosine(sentence_vectors[u], sentence_vectors[v])
-</pre>
+```
 
 In another case, if we recognize that semantically identical nodes often times overlap in vocabulary
 and word placement (i.e, <q>sweating</q> and <q>sweating bullets</q>), we may utilize a version
