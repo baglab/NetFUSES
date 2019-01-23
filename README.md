@@ -77,7 +77,7 @@ collapsed_sent, node2fuseid_sent = sentence_embedding_fuser.collapse(fused_sent)
 
 
 final_fused_lev = nf.convert_graph(collapsed_lev)
-final_fused_sent = nf.convert_graph(collapsed_sen)
+final_fused_sent = nf.convert_graph(collapsed_sent)
 </pre>
 
 ## Installation Requirements
