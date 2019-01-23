@@ -86,7 +86,7 @@ class NetworkFuser:
 
         return G
 
-    def collapse_fused_graphs(self, fuser, *graphs, collapsed=nx.MultiGraph()):
+    def collapse(self, fuser, *graphs, collapsed=nx.MultiGraph()):
 
         """
         collapse the graph G so that each connected component in G becomes a 
