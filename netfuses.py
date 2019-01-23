@@ -15,100 +15,6 @@ a similarity to u greater than t.
 """
 import networkx as nx
 
-def fuse(t, simfn, *graphs,verbose=0,**kwargs):
-    """
-    fuse graphs by finding analogs above a given threshold for each node in the union
-    of their vertex sets; nodes without analogs are not fused to anything
-    
-    the algorithm proceeds by:
-
-    '''On input graphs 𝒢 = {G₀, G₁, ..., Gₙ} and threshold value t,
-    1. Initialize fused graph G* = (V*, E*) where E* = ∅ and 
-         V* = union of nodes across each Gᵢ∈ 𝒢
-    2. for each i ∈ V*;
-    3.     E* = E* ∪ { (i,j) | j ∈ V* and S(i,j) > t }  
-    4. return G*'''
-
-    args:
-        :t (float) - threshold value for the similarity function
-        :simfn (function) 
-            args:
-                :u - the source node
-                :V - set of nodes in which there might be located analog(s)
-                :t - the threshold
-                :**kwargs - any keyword arguments necessary for the function
-            returns:
-                :nodes in v ∈ V* \ {u} for which S(u, v) > t
-        :*graphs (nx.Graph child) - graphs to fuse together
-        :verbose: print output every `verbose` steps; not at all for verbose = None
-        :**kwargs
-    returns:
-        : (nx.Graph) - the fused representation of the input graphs
-    """
-    union = set().union(*map(set, graphs))
-
-    G = nx.Graph()
-    G.add_nodes_from(union)
-    G.add_edges_from((u,u) for u in union)
-
-    for i, u in enumerate(list(union),1):
-        if verbose is not None and i % verbose == 0:
-            print('\r{0}\r{1:5d}/{2:5d}, t={3}'.format(80*' ',i,len(union),t))
-        valid_nodes = union - set([u])
-        analogs = simfn(u, valid_nodes, t, **kwargs)
-        G.add_edges_from((u,a) for a in analogs)
-        #analogdf = u_simdf[u_simdf.cn_node.isin(valid_nodes)]
-        #mx = analogdf.similarity.max()
-        #if mx > t:
-        #    analogdf = u_simdf[u_simdf.similarity > t]
-        #    #analogdf = u_simdf[u_simdf.similarity == mx]
-        #    analogs = set(analogdf.cn_node.values.tolist())
-        #    if analogs:
-        #        G.add_edges_from((u,a) for a in analogs)
-        #else:
-        #    analogs = []
-    if verbose is not None:
-        print('performed fuse')
-    return G 
-
-def collapse_fused_graph(fuser,*graphs, collapsed=nx.MultiGraph()):
-    """
-    collapse the graph G so that each connected component in G becomes a fused node in the 
-    output graph
-
-    If a connected component contains two nodes that share an edge, create a self loop in the
-    output graph
-
-    args:
-        :fuser (nx.Graph) - the fused graph, output of `netfuses.fuse`
-        :*graphs - some number of source graphs that will comprise the final graph
-        :collapsed (nx.Graph child) - the graph to populate
-    returns:
-        :populated version of `collapsed` 
-        :(dict) - mapping from component id to node
-        :(dict) - mapping from node to component id
-    """
-    conn_comps = sorted(nx.connected_component_subgraphs(fuser), key=len)
-    # each node in the fused graph is a component in the fuser
-    id2fused_set = dict()
-    node2fuse_id = dict()
-    # add self loops and find node ids
-    for i, component in enumerate(conn_comps):
-        id2fused_set[i] = set(component.nodes())
-        node2fuse_id.update(**{u:i for u in component})
-        collapsed.add_node(i)
-        self_loops = []
-        neighbors = []
-        for node in component:
-            for Gi in filter(lambda g: node in g, graphs):
-                self_loops.extend(n for n in Gi.neighbors(node) if n in component)
-                neighbors.extend(Gi.neighbors(node))
-
-        collapsed.add_edges_from((i, node2fuse_id[u]) for u in neighbors) # draw edges between aggregated node sets
-        collapsed.add_edges_from((i,i) for _ in range(len(self_loops)))   # add self loops 
-
-    return collapsed, id2fused_set, node2fuse_id
-
 def convert_graph(G, Gprime=nx.DiGraph()):
     """
     convert a multigraph to another graph type
@@ -120,3 +26,106 @@ def convert_graph(G, Gprime=nx.DiGraph()):
     """
     Gprime.add_edges_from(G.edges())
     return Gprime 
+
+class NetworkFuser:
+    """
+    Fuses graphs by finding analogs above a given threshold
+    using the specified similarity function parameter.
+    """
+    def __init__(self, simfn, threshold=0.95):
+        """
+        constructs the network fuser using the specified
+        similarity function and threshold value
+
+        args:
+            :simfn (function)
+                determines the similarity between two nodes
+                args:
+                    :u - node from a network
+                    :v - node from a network 
+                    :**kwargs - any keyword arguments necessary
+                returns:
+                    :(float) similarity between the two nodes
+        """
+
+        self.similarity_func = simfn
+        self.t = threshold
+
+    def _above_threshold(self,u,v):
+        return self.similarit_func(u, v) > self.t
+
+    def fuse(self, *graphs, verbose=0, **kwargs):
+        """
+        fuses the graphs by proceeding through the NetFUSES algorithm
+        
+        '''On input graphs 𝒢 = {G₀, G₁, ..., Gₙ} and threshold value t,
+        1. Initialize fused graph G* = (V*, E*) where E* = ∅ and 
+             V* = union of nodes across each Gᵢ∈ 𝒢
+        2. for each i ∈ V*;
+        3.     E* = E* ∪ { (i,j) | j ∈ V* and S(i,j) > t }  
+        4. return G*'''
+
+        args:
+            :*graphs some number of (nx.Graph) - members of 𝒢 
+            :verbose: print output every `verbose` steps; not at all for
+                      verbose = None
+            :**kwargs - passed to the similarity function
+        """
+        union = set().union(*map(set, graphs))
+        G = nx.Graph()
+        G.add_nodes_from(union)
+        G.add_edges_from((u,u) for u in union)
+
+        for i, u in enumerate(list(union), 1):
+            if verbose is not None and i % verbose == 0:
+                print('\r{0}\r{1:5d/{2:5d}, t={3}'.format(80*' ',i,len(union), self.t))
+
+            valid_nodes = union - set([u])
+            analogs = [self._above_threshold(u, v) for v in valid_nodes]
+            G.add_edges_from((u,a) for a in analogs)
+
+        return G
+
+    def collapse_fused_graphs(self, fuser, *graphs, collapsed=nx.MultiGraph()):
+
+        """
+        collapse the graph G so that each connected component in G becomes a 
+        fused node in the output graph
+
+        If a connected component contains two nodes that share an edge, 
+        create a self loop in the output graph
+
+        args:
+            :fuser (nx.Graph) - the fused graph, output of `self._fuse`
+            :*graphs - some number of source graphs that will comprise the final graph
+            :collapsed (nx.Graph child) - the graph to populate
+        returns:
+            :populated version of `collapsed` containing a mapping
+                from component id -> node under the attribute 'fused_set' 
+            :(dict) - mapping from node to component id
+        """
+
+        conn_comps = sorted(nx.connected_component_subgraphs(fuser), key=len)
+
+        # each node in the fused graph is a component in the fuser
+        id2fused_set = dict()
+        node2fuse_id = dict()
+        # add self loops and find node ids
+        for i, component in enumerate(conn_comps):
+            id2fused_set[i] = set(component)
+            node2fuse_id.update(**{u:i for u in component})
+            collapsed.add_node(i)
+            self_loops = []
+            neighbors = []
+            for node in component:
+                for Gi in filter(lambda g: node in g, graphs):
+                    self_loops.extend(n for n in Gi.neighbors(node) if n in component) 
+                    neighbors.extend(Gi.neighbors(node))
+
+            # draw edges between aggregated node sets
+            collapsed.add_edges_from((i, node2fuse_id[u]) for u in neighbors) 
+            # add self loops 
+            collapsed.add_edges_from((i,i) for _ in range(len(self_loops))) 
+        
+        nx.set_node_attributes(collapsed, 'fused_set', id2fused_set)
+        return collapsed, node2fuse_id
