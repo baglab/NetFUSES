@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 implements a clean version of the NetFUSES algorithm, allowing for an extensible similarity function.
 
