@@ -2,8 +2,7 @@
 ## Table of Contents
 - [Overview](#overview)
 
-<a name="overview"/>
-## Overview
+## Overview <a name="overview"/>
 
 NetFUSES is a __graph fusion__ algorithm for coalescing networks of distinct sets of nodes into 
 a single network when node identity is unreliable or ambiguous. 
