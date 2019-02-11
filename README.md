@@ -1,4 +1,8 @@
 # NetFUSES
+## Table of Contents
+- 
+
+<a name="overview"/>
 ## Overview
 
 NetFUSES is a __graph fusion__ algorithm for coalescing networks of distinct sets of nodes into 
@@ -38,7 +42,7 @@ For the sake of the example, let's assume there's an embedding file called `exte
 that stores sentence vectors.
 
 ```python
-from external_embedding_file import sentence_vectors  # maps causal entities to sentence embeddings
+sentence_vectors = IMPORT_SENTENCE_VECS(...)  # maps causal entities to sentence embeddings
 import scipy.spatial
 
 def cosine_similarity(u, v):
@@ -50,12 +54,12 @@ and word placement (i.e, <q>sweating</q> and <q>sweating bullets</q>), we may ut
 of the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a>
 a method for determining how many moves it takes to change one string to another.
 
-<pre>
+```python
 from jellyfish import levenshtein_distance     # library for levenshtein distance
 
 def levenshtein_similarity(u, v):
     return 1 - (1/levenshtein_distance(u, v)
-</pre>
+```
 
 Here we will apply NetFUSES to three causal attribution subgraphs centered around the word <q>anxiety</q>
 as shown below.
@@ -63,7 +67,7 @@ as shown below.
 For the sake of the example we will assume these graphs are stored predefined as variables
 `wikidata`, `conceptnet`, and `iprnet`.
 
-<pre>
+```python
 import netfuses as nf
 
 levenshtein_fuser = nf.NetworkFuser(levenshtein_similarity, threshold=0.95) 
@@ -78,7 +82,33 @@ collapsed_sent, node2fuseid_sent = sentence_embedding_fuser.collapse(fused_sent)
 
 final_fused_lev = nf.convert_graph(collapsed_lev)
 final_fused_sent = nf.convert_graph(collapsed_sent)
-</pre>
+```
 
 ## Installation Requirements
 This module requires the installation of networkx (we used version 1.11)
+
+## Citation Information
+This code coincides with our work on analyzing causal attribution graphs.
+
+Inferring the size of the causal universe: features and fusion of causal attribution networks,
+D. Berenberg, and J.P Bagrow, Preprint (2018)
+
+```bibtex
+@article{DBLP:journals/corr/abs-1812-06038,
+  author    = {Daniel Berenberg and
+               James P. Bagrow},
+  title     = {Inferring the size of the causal universe: features and fusion of
+               causal attribution networks},
+  journal   = {CoRR},
+  volume    = {abs/1812.06038},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1812.06038},
+  archivePrefix = {arXiv},
+  eprint    = {1812.06038},
+  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-06038},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+
