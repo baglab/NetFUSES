@@ -1,8 +1,11 @@
 # NetFUSES
 ## Table of Contents
-- [Overview](#overview)
+- [Description](#overview)
+- [Algorithm Overview](#algoverview)
+- [Installation requirements](#install)
+- [Citation Information](#citation)
 
-## Overview <a name="overview"/>
+# Description <a name="overview"/>
 
 NetFUSES is a __graph fusion__ algorithm for coalescing networks of distinct sets of nodes into 
 a single network when node identity is unreliable or ambiguous. 
@@ -10,7 +13,7 @@ Graph fusion is a unique problem associated with combining nodes both across and
 The combination of such nodes is based on a similarity function defined across all nodes 
 with respect to a single threshold parameter _t_.
 
-## Algorithm 
+# Algorithm Overview <a name="algoverview"/>
 
 The NetFUSES algorithm consists of two stages - fusing and collapsing;
 - Fusing draws analogs between nodes across the set of graphs to fuse
@@ -83,10 +86,10 @@ final_fused_lev = nf.convert_graph(collapsed_lev)
 final_fused_sent = nf.convert_graph(collapsed_sent)
 ```
 
-## Installation Requirements
+## Installation Requirements <a name="install"/>
 This module requires the installation of networkx (we used version 1.11)
 
-## Citation Information
+## Citation Information <a name="citation"/>
 This code coincides with our work on analyzing causal attribution graphs.
 
 Inferring the size of the causal universe: features and fusion of causal attribution networks,<br/>
