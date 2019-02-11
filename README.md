@@ -1,6 +1,6 @@
 # NetFUSES
 ## Table of Contents
-- 
+- [Overview](#overview)
 
 <a name="overview"/>
 ## Overview
@@ -90,7 +90,7 @@ This module requires the installation of networkx (we used version 1.11)
 ## Citation Information
 This code coincides with our work on analyzing causal attribution graphs.
 
-Inferring the size of the causal universe: features and fusion of causal attribution networks,
+Inferring the size of the causal universe: features and fusion of causal attribution networks,<br/>
 D. Berenberg, and J.P Bagrow, Preprint (2018)
 
 ```bibtex
