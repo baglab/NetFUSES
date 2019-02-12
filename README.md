@@ -30,7 +30,7 @@ cd NetFUSES
 
 Run:
 ```bash
-pip install --upgrade netfuses` or `python setup.py install
+pip install --upgrade netfuses
 ```
 
 This will install both `netfuses` and its required dependency, `networkx==1.11`.
