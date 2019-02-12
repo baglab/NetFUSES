@@ -17,17 +17,21 @@ with respect to a single threshold parameter _t_.
 To install, first clone the repository. 
 
 Run:
-    `git clone https://github.com/baglab/NetFUSES`
+```bash
+git clone https://github.com/baglab/NetFUSES
+```
 
 Next, install `netfuses` into your system's `site_packages` directory. 
 
 Change directories into the newly cloned repository with:
-
-    `cd NetFUSES`
+```bash
+cd NetFUSES
+```
 
 Run:
-
-    `pip install --upgrade netfuses` or `python setup.py install`
+```bash
+pip install --upgrade netfuses` or `python setup.py install
+```
 
 This will install both `netfuses` and its required dependency, `networkx==1.11`.
 
