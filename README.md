@@ -13,7 +13,7 @@ Graph fusion is a unique problem associated with combining nodes both across and
 The combination of such nodes is based on a similarity function defined across all nodes 
 with respect to a single threshold parameter _t_.
 
-## Installation Requirements <a name="install"/>
+## To Install <a name="install"/>
 To install, first clone the repository. 
 
 Run:
