@@ -17,6 +17,7 @@ and any other keyword arguments necessary. `simfn` returns all nodes that have
 a similarity to u greater than t.
 """
 import networkx as nx
+__all__ = ["convert_graph","NetworkFuser"]
 
 def convert_graph(G, Gprime=nx.DiGraph()):
     """

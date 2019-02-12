@@ -1,8 +1,8 @@
 # NetFUSES
 ## Table of Contents
 - [Description](#overview)
+- [Installation](#install)
 - [Algorithm Overview](#algoverview)
-- [Installation requirements](#install)
 - [Citation Information](#citation)
 
 # Description <a name="overview"/>
@@ -12,6 +12,19 @@ a single network when node identity is unreliable or ambiguous.
 Graph fusion is a unique problem associated with combining nodes both across and inside of networks.
 The combination of such nodes is based on a similarity function defined across all nodes 
 with respect to a single threshold parameter _t_.
+
+## Installation Requirements <a name="install"/>
+To install, first clone the repository. Run:
+    `git clone https://github.com/baglab/NetFUSES`
+
+Next, install `netfuses` into your system's `site_packages` directory. 
+Change directories into the newly cloned repository with
+    `cd NetFUSES`
+
+Run:
+    `pip install --upgrade netfuses` or `python setup.py install`
+
+This will install both netfuses and its required dependency, networkx version 1.11.
 
 # Algorithm Overview <a name="algoverview"/>
 
@@ -25,7 +38,7 @@ This version is implemented to support different similarity functions, manifeste
 by a parameter to `NetworkFuser`, `simfn`. As described in the docstring, `simfn`
 takes as input two network nodes _u_ and _v_, any other keyword arguments necessary. 
 
-## Usage
+## Algorithm Usage
 NetFUSES is able to fuse a variety of networks. See below for an example.
 
 Consider two directed networks of textual entities in which edges _(i, j)_ exist if and
@@ -86,8 +99,6 @@ final_fused_lev = nf.convert_graph(collapsed_lev)
 final_fused_sent = nf.convert_graph(collapsed_sent)
 ```
 
-## Installation Requirements <a name="install"/>
-This module requires the installation of networkx (we used version 1.11)
 
 ## Citation Information <a name="citation"/>
 This code coincides with our work on analyzing causal attribution graphs.
