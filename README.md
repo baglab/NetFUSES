@@ -14,18 +14,22 @@ The combination of such nodes is based on a similarity function defined across a
 with respect to a single threshold parameter _t_.
 
 ## Installation Requirements <a name="install"/>
-To install, first clone the repository. Run:
+To install, first clone the repository. 
+
+Run:
     `git clone https://github.com/baglab/NetFUSES`
 
 Next, install `netfuses` into your system's `site_packages` directory. 
 
-Change directories into the newly cloned repository with
+Change directories into the newly cloned repository with:
+
     `cd NetFUSES`
 
 Run:
+
     `pip install --upgrade netfuses` or `python setup.py install`
 
-This will install both netfuses and its required dependency, networkx version 1.11.
+This will install both `netfuses` and its required dependency, `networkx==1.11`.
 
 # Algorithm Overview <a name="algoverview"/>
 
