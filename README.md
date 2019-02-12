@@ -18,6 +18,7 @@ To install, first clone the repository. Run:
     `git clone https://github.com/baglab/NetFUSES`
 
 Next, install `netfuses` into your system's `site_packages` directory. 
+
 Change directories into the newly cloned repository with
     `cd NetFUSES`
 
