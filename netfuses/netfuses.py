@@ -19,6 +19,7 @@ a similarity to u greater than t.
 import networkx as nx
 __all__ = ["convert_graph","NetworkFuser"]
 
+
 def convert_graph(G, Gprime=nx.DiGraph()):
     """
     convert a multigraph to another graph type
@@ -26,7 +27,7 @@ def convert_graph(G, Gprime=nx.DiGraph()):
         :G (nx.Graph child) - graph to collapse edges
         :Gprime (nx.Graph child) - graph to populate; defaults to digraph
     returns:    
-        :converted mg --> simple 
+        :the newly converted graph
     """
     Gprime.add_edges_from(G.edges())
     return Gprime 
@@ -107,8 +108,11 @@ class NetworkFuser:
             :populated version of `collapsed` containing a mapping
                 from component id -> node under the attribute 'fused_set' 
             :(dict) - mapping from node to component id
+        raises:
+            :AssertionError if graphs is not all nx.Graph children
         """
-
+        assert all(isinstance(g, nx.Graph) for g in graphs)
+        
         conn_comps = sorted(nx.connected_component_subgraphs(fuser), key=len)
 
         # each node in the fused graph is a component in the fuser
