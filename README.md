@@ -35,7 +35,7 @@ run the following command from inside of the NetFUSES directory:
 ```bash
 python setup.py install
 ```
-# Usage <a name="usage"/>
+# Example <a name="usage"/>
 NetFUSES lets us "fuse" semantically similar nodes across networks with respect to some similarity
 function. 
 
