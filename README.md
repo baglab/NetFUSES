@@ -2,6 +2,7 @@
 ## Table of Contents
 - [Description](#overview)
 - [Installation](#install)
+- [Usage](#usage)
 - [Algorithm Overview](#algoverview)
 - [Citation Information](#citation)
 
@@ -34,13 +35,28 @@ run the following command from inside of the NetFUSES directory:
 ```bash
 python setup.py install
 ```
-
 # Usage <a name="usage"/>
+NetFUSES lets us "fuse" semantically similar nodes in a network with respect to some similarity
+function. 
+
+In this case, let's assume we have three separate knowledge graphs: `wikidata`, 
+`conceptnet`, and `iprnet`. 
+
+Each of the nodes in these knowledge graphs is a text entity or "sentence". 
+For the example, let's suppose we have already mapped each text entity onto a 
+high dimensional vector space, making it a "sentence vector".
+```python
+wikidata, conceptnet, iprnet = IMPORT_KNOWLEDGE_GRAPHS(...)
+sentence_vectors = IMPORT_SENTENCE_VECS(...)  # maps text entities to sentence embeddings
+```
+
+Using these knowledge graphs and precomputed vectors we can invoke NetFUSES to obtain
+a richer, unified representation of the knowledge embedded within the separate entities. 
+
 ```python
 import netfuses as nf
 import scipy.spatial
 
-sentence_vectors = IMPORT_SENTENCE_VECS(...)  # maps text entities to sentence embeddings
 
 def cosine_similarity(u, v):
     return 1 - scipy.spatial.distance.cosine(sentence_vectors[u], sentence_vectors[v])
@@ -76,9 +92,6 @@ we could map each textual entity to
 <a href="https://en.wikipedia.org/wiki/Sentence_embedding">sentence embeddings</a> 
 and define similarity by <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a>
 between vector.
-
-For the sake of the example, let's assume there's an embedding file called `external_embedding_file`
-that stores sentence vectors.
 
 ```python
 sentence_vectors = IMPORT_SENTENCE_VECS(...)  # maps causal entities to sentence embeddings
