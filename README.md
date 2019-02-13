@@ -14,14 +14,7 @@ The combination of such nodes is based on a similarity function defined across a
 with respect to a single threshold parameter _t_.
 
 ## To Install <a name="install"/>
-To install, first clone the repository. 
-
-Run:
-```bash
-git clone https://github.com/baglab/NetFUSES
-```
-
-Next, install `netfuses` into your system's `site_packages` directory. 
+To install, first download the NetFUSES repository. 
 
 Change directories into the newly cloned repository with:
 ```bash
@@ -34,6 +27,28 @@ pip install --upgrade netfuses
 ```
 
 This will install both `netfuses` and its required dependency, `networkx==1.11`.
+
+If pip is not installed on your machine or you would not like to use it, you can
+run the following command from inside of the NetFUSES directory:
+
+```bash
+python setup.py install
+```
+
+# Usage <a name="usage"/>
+```python
+import netfuses as nf
+import scipy.spatial
+
+sentence_vectors = IMPORT_SENTENCE_VECS(...)  # maps text entities to sentence embeddings
+
+def cosine_similarity(u, v):
+    return 1 - scipy.spatial.distance.cosine(sentence_vectors[u], sentence_vectors[v])
+
+sentence_fuser = nf.NetworkFuser(cosine_similarity, threshold=0.95)
+fused_sentences = sentence_fuser.fuse(wikidata, concepnet, iprnet)
+collapsed_knowledge_graph, node2fuseid = sentence_fuser.collapse(fused_sentences)
+```
 
 # Algorithm Overview <a name="algoverview"/>
 
