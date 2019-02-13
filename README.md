@@ -23,6 +23,8 @@ high dimensional vector space, making a "sentence vector".
 
 NetFUSES lets us combine nodes based on the semantic information contained within these sentence vectors. Using these knowledge graphs and precomputed vectors we can invoke NetFUSES to obtain a fused graph `G`, removing redundancies and giving a unified representation of the knowledge embedded within the separate entities. 
 
+Here we fuse the three graphs using a cosine similarity function based on the sentence vectors:
+
 ```python
 import netfuses as nf
 import scipy.spatial
