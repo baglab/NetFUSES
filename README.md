@@ -14,27 +14,6 @@ Graph fusion is a unique problem associated with combining nodes both across and
 The combination of such nodes is based on a similarity function defined across all nodes 
 with respect to a single threshold parameter _t_.
 
-## To Install <a name="install"/>
-To install, first download the NetFUSES repository. 
-
-Change directories into the newly cloned repository with:
-```bash
-cd NetFUSES
-```
-
-Run:
-```bash
-pip install --upgrade netfuses
-```
-
-This will install both `netfuses` and its required dependency, `networkx==1.11`.
-
-If pip is not installed on your machine or you would not like to use it, you can
-run the following command from inside of the NetFUSES directory:
-
-```bash
-python setup.py install
-```
 # Example <a name="usage"/>
 NetFUSES lets us "fuse" semantically similar nodes across networks with respect to some similarity
 function. 
@@ -65,6 +44,30 @@ sentence_fuser = nf.NetworkFuser(cosine_similarity, threshold=0.95)
 fused_sentences = sentence_fuser.fuse(wikidata, concepnet, iprnet)
 collapsed_knowledge_graph, node2fuseid = sentence_fuser.collapse(fused_sentences)
 ```
+
+
+# To Install <a name="install"/>
+To install, first download the NetFUSES repository. 
+
+Change directories into the newly cloned repository with:
+```bash
+cd NetFUSES
+```
+
+Run:
+```bash
+pip install --upgrade netfuses
+```
+
+This will install both `netfuses` and its required dependency, `networkx==1.11`.
+
+If pip is not installed on your machine or you would not like to use it, you can
+run the following command from inside of the NetFUSES directory:
+
+```bash
+python setup.py install
+```
+
 
 # Algorithm Overview <a name="algoverview"/>
 
