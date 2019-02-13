@@ -15,17 +15,13 @@ NetFUSES combines nodes using a given similarity function, allowing researchers 
 
 ## Example <a name="example"/>
 
-NetFUSES lets us "fuse" semantically similar nodes across networks with respect to some similarity
-function. 
-
-In this case, let's assume we have three separate graphs: `G1`, `G2`, and `G3`. 
+Suppose we have three separate graphs: `G1`, `G2`, and `G3`. 
 
 Each of the nodes in these knowledge graphs is a text entity or "sentence". 
 For the example, let's suppose we have already mapped each text entity onto a 
 high dimensional vector space, making a "sentence vector".
 
-Using these knowledge graphs and precomputed vectors we can invoke NetFUSES to obtain
-a fused graph `G`, giving a richer, unified representation of the knowledge embedded within the separate entities. 
+NetFUSES lets us combine nodes based on the semantic information contained within these sentence vectors. Using these knowledge graphs and precomputed vectors we can invoke NetFUSES to obtain a fused graph `G`, removing redundancies and giving a unified representation of the knowledge embedded within the separate entities. 
 
 ```python
 import netfuses as nf
