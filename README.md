@@ -123,13 +123,15 @@ For the sake of the example we will assume these graphs are stored predefined as
 ```python
 import netfuses as nf
 
+wikidata, conceptnet, iprnet = IMPORT_GRAPHS(...)
+
 levenshtein_fuser = nf.NetworkFuser(levenshtein_similarity, threshold=0.95) 
 sentence_embedding_fuser = nf.NetworkFuser(cosine_similarity, threshold=0.95)
 
 fused_lev = levenshtein_fuser.fuse(wikidata, conceptnet, iprnet)
 collapsed_lev, node2fuseid_lev = levenshtein_fuser.collapse(fused_lev)
 
-fused_sent = sentence_embedding_fuser.fuse(wikidata, concepnet, iprnet)
+fused_sent = sentence_embedding_fuser.fuse(wikidata, conceptnet, iprnet)
 collapsed_sent, node2fuseid_sent = sentence_embedding_fuser.collapse(fused_sent)
 
 
