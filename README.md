@@ -139,13 +139,14 @@ final_fused_sent = nf.convert_graph(collapsed_sent)
 
 
 ## Citation Information <a name="citation"/>
-This code coincides with our work on analyzing causal attribution graphs.
+
+Please cite NetFUSES if you use it in your work:
 
 Inferring the size of the causal universe: features and fusion of causal attribution networks,<br/>
-D. Berenberg, and J.P Bagrow, Preprint (2018)
+D. Berenberg, and J.P Bagrow, Preprint http://arxiv.org/abs/1812.06038 (2018)
 
 ```bibtex
-@article{DBLP:journals/corr/abs-1812-06038,
+@article{berenberg2018,
   author    = {Daniel Berenberg and
                James P. Bagrow},
   title     = {Inferring the size of the causal universe: features and fusion of
@@ -156,9 +157,6 @@ D. Berenberg, and J.P Bagrow, Preprint (2018)
   url       = {http://arxiv.org/abs/1812.06038},
   archivePrefix = {arXiv},
   eprint    = {1812.06038},
-  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-06038},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
 
