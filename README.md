@@ -1,10 +1,9 @@
 # NetFUSES
 
-NetFUSES is a __graph fusion__ algorithm for coalescing networks of distinct sets of nodes into 
+_Network FUsion with SEmantic Similarity_ (NetFUSES) is a __graph fusion__ algorithm for coalescing networks of distinct sets of nodes into 
 a single network when node identity is unreliable or ambiguous. 
 Graph fusion is a unique problem associated with combining nodes both across and inside of networks.
-The combination of such nodes is based on a similarity function defined across all nodes 
-with respect to a single threshold parameter _t_.
+NetFUSES combines nodes using a given similarity function, allowing researchers in different domains to use NetFUSES by introducing their own similarity measures.
 
 
 ### Table of Contents
