@@ -18,31 +18,29 @@ with respect to a single threshold parameter _t_.
 NetFUSES lets us "fuse" semantically similar nodes across networks with respect to some similarity
 function. 
 
-In this case, let's assume we have three separate knowledge graphs: `wikidata`, 
-`conceptnet`, and `iprnet`. 
+In this case, let's assume we have three separate graphs: `G1`, `G2`, and `G3`. 
 
 Each of the nodes in these knowledge graphs is a text entity or "sentence". 
 For the example, let's suppose we have already mapped each text entity onto a 
-high dimensional vector space, making it a "sentence vector".
-```python
-wikidata, conceptnet, iprnet = IMPORT_KNOWLEDGE_GRAPHS(...)
-sentence_vectors = IMPORT_SENTENCE_VECS(...)  # maps text entities to sentence embeddings
-```
+high dimensional vector space, making a "sentence vector".
 
 Using these knowledge graphs and precomputed vectors we can invoke NetFUSES to obtain
-a richer, unified representation of the knowledge embedded within the separate entities. 
+a fused graph `G`, giving a richer, unified representation of the knowledge embedded within the separate entities. 
 
 ```python
 import netfuses as nf
 import scipy.spatial
 
-
 def cosine_similarity(u, v):
     return 1 - scipy.spatial.distance.cosine(sentence_vectors[u], sentence_vectors[v])
 
+G1, G2, G3 = IMPORT_KNOWLEDGE_GRAPHS(...)
+sentence_vectors = IMPORT_SENTENCE_VECS(...)  # maps text entities to sentence embeddings
+
 sentence_fuser = nf.NetworkFuser(cosine_similarity, threshold=0.95)
-fused_sentences = sentence_fuser.fuse(wikidata, concepnet, iprnet)
-collapsed_knowledge_graph, node2fuseid = sentence_fuser.collapse(fused_sentences)
+
+fused_sentences = sentence_fuser.fuse(G1, G2, G3)
+G, node2fuseid = sentence_fuser.collapse(fused_sentences)
 ```
 
 
