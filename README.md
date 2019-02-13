@@ -1,12 +1,4 @@
 # NetFUSES
-## Table of Contents
-- [Description](#overview)
-- [Installation](#install)
-- [Usage](#usage)
-- [Algorithm Overview](#algoverview)
-- [Citation Information](#citation)
-
-# Description <a name="overview"/>
 
 NetFUSES is a __graph fusion__ algorithm for coalescing networks of distinct sets of nodes into 
 a single network when node identity is unreliable or ambiguous. 
@@ -14,7 +6,16 @@ Graph fusion is a unique problem associated with combining nodes both across and
 The combination of such nodes is based on a similarity function defined across all nodes 
 with respect to a single threshold parameter _t_.
 
-# Example <a name="usage"/>
+
+### Table of Contents
+- [Example](#usage)
+- [Installation](#install)
+- [Algorithm Overview](#algoverview)
+- [Citation Information](#citation)
+
+
+## Example <a name="example"/>
+
 NetFUSES lets us "fuse" semantically similar nodes across networks with respect to some similarity
 function. 
 
@@ -44,7 +45,7 @@ G, node2fuseid = sentence_fuser.collapse(fused_sentences)
 ```
 
 
-# To Install <a name="install"/>
+## To Install <a name="install"/>
 To install, first download the NetFUSES repository. 
 
 Change directories into the newly cloned repository with:
@@ -67,7 +68,7 @@ python setup.py install
 ```
 
 
-# Algorithm Overview <a name="algoverview"/>
+## Algorithm Overview <a name="algoverview"/>
 
 The NetFUSES algorithm consists of two stages - fusing and collapsing;
 - Fusing draws analogs between nodes across the set of graphs to fuse
@@ -79,7 +80,7 @@ This version is implemented to support different similarity functions, manifeste
 by a parameter to `NetworkFuser`, `simfn`. As described in the docstring, `simfn`
 takes as input two network nodes _u_ and _v_, any other keyword arguments necessary. 
 
-## Algorithm Usage
+### Algorithm Usage
 NetFUSES is able to fuse a variety of networks. See below for an example.
 
 Consider two directed networks of textual entities in which edges _(i, j)_ exist if and
