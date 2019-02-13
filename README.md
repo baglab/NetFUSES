@@ -15,11 +15,8 @@ NetFUSES combines nodes using a given similarity function, allowing researchers 
 
 ## Example <a name="example"/>
 
-Suppose we have three separate graphs: `G1`, `G2`, and `G3`. 
-
-Each of the nodes in these knowledge graphs is a text entity or "sentence". 
-For the example, let's suppose we have already mapped each text entity onto a 
-high dimensional vector space, making a "sentence vector".
+Suppose we have three separate graphs: `G1`, `G2`, and `G3`. Associated with each node in these graphs is a written text entity or "sentence".   We can capture the semantics of these natural language text by mapping each entity into a 
+high-dimensional vector space, making a "sentence vector".
 
 NetFUSES lets us combine nodes based on the semantic information contained within these sentence vectors. Using these knowledge graphs and precomputed vectors we can invoke NetFUSES to obtain a fused graph `G`, removing redundancies and giving a unified representation of the knowledge embedded within the separate entities. 
 
