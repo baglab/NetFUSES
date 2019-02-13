@@ -18,9 +18,7 @@ NetFUSES combines nodes using a given similarity function, allowing researchers 
 Suppose we have three separate graphs: `G1`, `G2`, and `G3`. Associated with each node in these graphs is a written text entity or "sentence".   We can capture the semantics of these natural language text by mapping each entity into a 
 high-dimensional vector space, making a "sentence vector".
 
-NetFUSES lets us combine nodes based on the semantic information contained within these sentence vectors. Using these knowledge graphs and precomputed vectors we can invoke NetFUSES to obtain a fused graph `G`, removing redundancies and giving a unified representation of the knowledge embedded within the separate entities. 
-
-Here we fuse the three graphs using a cosine similarity function based on the sentence vectors:
+Here we can identify and fuse semantically-equivalent nodes across the three graphs using a cosine similarity function based on these sentence vectors:
 
 ```python
 import netfuses as nf
@@ -37,6 +35,9 @@ sentence_fuser = nf.NetworkFuser(cosine_similarity, threshold=0.95)
 fused_sentences = sentence_fuser.fuse(G1, G2, G3)
 G, node2fuseid = sentence_fuser.collapse(fused_sentences)
 ```
+
+NetFUSES lets us combine nodes based on the semantic information contained within these sentence vectors. 
+Using these knowledge graphs and precomputed vectors, we can invoke NetFUSES to obtain a fused graph `G`, removing redundancies and giving a unified representation of the knowledge embedded within the separate entities.
 
 
 ## To Install <a name="install"/>
