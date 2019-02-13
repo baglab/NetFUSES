@@ -147,10 +147,8 @@ D. Berenberg, and J.P Bagrow, [arXiv:1812.06038](http://arxiv.org/abs/1812.06038
 
 ```bibtex
 @article{berenberg2018,
-  author    = {Daniel Berenberg and
-               James P. Bagrow},
-  title     = {Inferring the size of the causal universe: features and fusion of
-               causal attribution networks},
+  author    = {Daniel Berenberg and James P. Bagrow},
+  title     = {Inferring the size of the causal universe: features and fusion of causal attribution networks},
   journal   = {CoRR},
   volume    = {abs/1812.06038},
   year      = {2018},
