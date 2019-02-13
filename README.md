@@ -143,7 +143,7 @@ final_fused_sent = nf.convert_graph(collapsed_sent)
 Please cite NetFUSES if you use it in your work:
 
 Inferring the size of the causal universe: features and fusion of causal attribution networks,<br/>
-D. Berenberg, and J.P Bagrow, Preprint http://arxiv.org/abs/1812.06038 (2018)
+D. Berenberg, and J.P Bagrow, [arXiv:1812.06038](http://arxiv.org/abs/1812.06038) (2018)
 
 ```bibtex
 @article{berenberg2018,
