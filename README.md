@@ -36,7 +36,7 @@ run the following command from inside of the NetFUSES directory:
 python setup.py install
 ```
 # Usage <a name="usage"/>
-NetFUSES lets us "fuse" semantically similar nodes in a network with respect to some similarity
+NetFUSES lets us "fuse" semantically similar nodes across networks with respect to some similarity
 function. 
 
 In this case, let's assume we have three separate knowledge graphs: `wikidata`, 
