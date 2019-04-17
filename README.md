@@ -1,5 +1,8 @@
 # NetFUSES
 
+<img src="assets/cartoon.png">
+
+
 _Network FUsion with SEmantic Similarity_ (NetFUSES) is a __graph fusion__ algorithm for coalescing networks of distinct sets of nodes into 
 a single network when node identity is unreliable or ambiguous. 
 Graph fusion is a unique problem associated with combining nodes both across and inside of networks.
@@ -111,8 +114,8 @@ def levenshtein_similarity(u, v):
 ```
 
 Here we will apply NetFUSES to three causal attribution subgraphs centered around the word <q>anxiety</q>
-as shown below.
-<img src="assets/cartoon.png">
+as shown above.
+
 For the sake of the example we will assume these graphs are stored predefined as variables
 `wikidata`, `conceptnet`, and `iprnet`.
 
